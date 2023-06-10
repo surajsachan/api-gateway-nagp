@@ -1,0 +1,683 @@
+{
+	"info": {
+		"_postman_id": "de7722d3-91de-4a02-94c1-b9f3a99f08de",
+		"name": "ApiGateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "UserService",
+			"item": [
+				{
+					"name": "Signup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"suraj\",\n    \"password\":\"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/user-service/user/signup",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"user-service",
+								"user",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set('token',pm.response.json().token);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"suraj\",\n    \"password\":\"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/user-service/user/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"user-service",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\": \"{{token}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/user-service//user/verify",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"user-service",
+								"",
+								"user",
+								"verify"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "HotelBooking",
+			"item": [
+				{
+					"name": "search",
+					"item": [
+						{
+							"name": "Get All Hotels",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const hotels = pm.response.json();\r",
+											"const hotel = hotels[0];\r",
+											"const hotelID = hotel.hotelId;\r",
+											"const locationArray = hotel.locationDTO;\r",
+											"const location = locationArray[0];\r",
+											"const locationID = location.locationId;\r",
+											"pm.collectionVariables.set('hotelID', hotelID);\r",
+											"pm.collectionVariables.set('locationID', locationID);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8082/hotel-booking/search/",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"hotel-booking",
+										"search",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Hotel By ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8082/hotel-booking/search/id/{{hotelID}}",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"hotel-booking",
+										"search",
+										"id",
+										"{{hotelID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Hotel By Name",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8082/hotel-booking/search/name/mahagun",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"hotel-booking",
+										"search",
+										"name",
+										"mahagun"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Hotel By City",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8082/hotel-booking/search/city/mumbai",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"hotel-booking",
+										"search",
+										"city",
+										"mumbai"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "booking",
+					"item": [
+						{
+							"name": "Add Booking",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const bookingID = pm.response.json().bookingID; \r",
+											"pm.collectionVariables.set('bookingID', bookingID);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"locationId\": \"{{locationID}}\",\r\n    \"userId\": \"suraj_sachan\",\r\n    \"date\": \"03/30/2023\",\r\n    \"rooms\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8082/hotel-booking/booking/add",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"hotel-booking",
+										"booking",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Confirm Booking",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"bookingId\": \"{{bookingID}}\",\r\n    \"paymentDetails\": {\r\n        \"cardNumber\": \"1234567890123456\",\r\n        \"cvv\": \"123\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8082/hotel-booking/booking/confirm",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"hotel-booking",
+										"booking",
+										"confirm"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cancel Booking",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"bookingId\": \"{{bookingID}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8082/hotel-booking/booking/cancel",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"hotel-booking",
+										"booking",
+										"cancel"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Availability On given Date In Given City",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"city\": \"NEW DELHI\",\r\n    \"date\": \"03/30/2023\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8082/hotel-booking/booking/getByCity",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"hotel-booking",
+										"booking",
+										"getByCity"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Booking By ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8082/hotel-booking/booking/id/{{bookingID}}",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"hotel-booking",
+										"booking",
+										"id",
+										"{{bookingID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "FlightBooking",
+			"item": [
+				{
+					"name": "search",
+					"item": [
+						{
+							"name": "Search Flights",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"flightClass\": \"Both\",\n    \"arrivalLocation\": \"GOA\",\n    \"departureLocation\": \"NEW DELHI\",\n    \"departureDate\": \"2023-03-30\",\n    \"returnDate\": \"2023-03-30\",\n    \"searchType\": \"RoundTrip\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8082/flight-booking/search/flights",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"flight-booking",
+										"search",
+										"flights"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Check Flight Availability",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"listOfFlightId\": [\"02E\", \"02B\"],\n    \"numOfPassengers\": [\"2\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8082/flight-booking/search/checkAvailability",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"flight-booking",
+										"search",
+										"checkAvailability"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search flight details with ID",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "localhost:8082/flight-booking/search/flightInfo?flightId=01B",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"flight-booking",
+										"search",
+										"flightInfo"
+									],
+									"query": [
+										{
+											"key": "flightId",
+											"value": "01B"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "booking",
+					"item": [
+						{
+							"name": "Create flight booking",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set('bookingID',pm.response.json().bookingId);",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": \"suraj\",\n    \"flightBookingInfo\":[{\n        \"customerInfo\":[{\n            \"custName\": \"abc\",\n            \"custAddress\": \"xyz\",\n            \"custContactNumber\": \"9870221585\"\n        }],\n        \"flightId\": \"01B\"\n    },\n    {\n        \"customerInfo\":[{\n            \"custName\": \"abc\",\n            \"custAddress\": \"xyz\",\n            \"custContactNumber\": \"9870221585\"\n        }],\n        \"flightId\": \"02E\"\n    }],\n    \"paymentDetails\": {\n        \"cardNumber\": \"1234567890123455\",\n        \"cvv\": \"123\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8082/flight-booking/booking/createFlightBooking",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"flight-booking",
+										"booking",
+										"createFlightBooking"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cancel flight booking",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "localhost:8082/flight-booking/booking/cancelFlightBooking?bookingId={{bookingID}}",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"flight-booking",
+										"booking",
+										"cancelFlightBooking"
+									],
+									"query": [
+										{
+											"key": "bookingId",
+											"value": "{{bookingID}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "PaymentService",
+			"item": [
+				{
+					"name": "Make Payment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set('transactionID',pm.response.json().transactionId);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cardNumber\":\"1234567890123456\",\n    \"cvv\":\"123\",\n    \"amount\":\"4500\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/payment-service/makePayment",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"payment-service",
+								"makePayment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Make Refund",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"transactionId\":\"{{transactionID}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8082/payment-service/refund",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"payment-service",
+								"refund"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.request.headers.add({key:'Authorization', value:'Bearer '+ pm.collectionVariables.get('token')});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "-",
+			"type": "default"
+		},
+		{
+			"key": "hotelID",
+			"value": ""
+		},
+		{
+			"key": "locationID",
+			"value": ""
+		},
+		{
+			"key": "bookingID",
+			"value": ""
+		},
+		{
+			"key": "transactionID",
+			"value": ""
+		}
+	]
+}

@@ -1,0 +1,9 @@
+com/nagp/apigateway/filter/ReactiveWebfluxSecurityConfig.class
+com/nagp/apigateway/filter/SecurityContextRepository.class
+com/nagp/apigateway/dto/User.class
+com/nagp/apigateway/filter/UserServiceConfiguration.class
+com/nagp/apigateway/filter/CORSFilter.class
+com/nagp/apigateway/filter/UserServiceInstanceListSuppler.class
+com/nagp/apigateway/ApiGatewayApplication.class
+com/nagp/apigateway/filter/AuthenticationManager.class
+com/nagp/apigateway/filter/WebClientConfig.class
